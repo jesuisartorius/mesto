@@ -1,0 +1,80 @@
+.profile {
+  max-width: 880px;
+  margin: 0 auto 4rem auto;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  &__avatar {
+    height: 12rem;
+    border-radius: 50%;
+  }
+  &__info {
+    display: grid;
+    grid-template-columns: minmax(25rem, 40rem) min-content;
+    gap: 1.6rem 1.8rem;
+    grid-template-areas:
+      'name edit'
+      'job job';
+  }
+  &__name {
+    grid-area: name;
+    margin: 0;
+    font-size: 4.2rem;
+    font-weight: 500;
+    line-height: 1.14;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  &__job {
+    grid-area: job;
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+  &__edit-btn {
+    grid-area: edit;
+    align-self: center;
+    background-image: url(./../images/profile/editonlybtn.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #fff;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    transition: all 0.2s ease-in-out;
+  }
+  &__add-btn {
+    background-image: url(./../images/profile/plus.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 2px;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .profile {
+    flex-direction: column;
+    padding: 0 1.9rem 0 1.9rem;
+    &__job {
+      text-align: center;
+    }
+    &__add-btn {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 500px) {
+  .profile {
+    &__info {
+      grid-template-columns: auto min-content;
+      gap: 1.4rem 1rem;
+    }
+    &__name {
+      font-size: 2.7rem;
+    }
+  }
+}

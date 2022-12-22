@@ -1,0 +1,29 @@
+.gallery {
+  max-width: 880px;
+  margin: 0 auto;
+  margin-bottom: 6.6rem;
+  &__list {
+    list-style: none;
+    display: grid;
+    justify-content: center;
+
+    grid-template-columns: repeat(auto-fit, 28.2rem);
+    gap: 2rem 1.7rem;
+  }
+}
+
+// @media only screen and (max-width: 750px) {
+//   .gallery {
+//     &__list {
+//       grid-template-columns: repeat(2, 45%);
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 500px) {
+//   .gallery {
+//     &__list {
+//       grid-template-columns: 28.2rem;
+//     }
+//   }
+// }

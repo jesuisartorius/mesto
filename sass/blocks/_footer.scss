@@ -1,0 +1,10 @@
+.footer {
+  max-width: 880px;
+  margin: 0 auto;
+  margin-bottom: 6rem;
+  &__text {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #545454;
+  }
+}
