@@ -1,42 +1,18 @@
 'use strict';
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
-
 const page = document.querySelector('.page');
 //Gallery container
 const galleryContainer = page.querySelector('.gallery__list');
 //Buttons
 const editBtn = page.querySelector('.profile__edit-btn');
-const editCloseBtn = page.querySelector('.popup__close-btn_profile');
 const addBtn = page.querySelector('.profile__add-btn');
+// Close buttons
+const editCloseBtn = page.querySelector('.popup__close-btn_profile');
+const addCloseBtn = page.querySelector('.popup__close-btn_add-card');
 
 //Popups
 const editPopup = page.querySelector('.popup_type_edit-profile');
+const addPopup = page.querySelector('.popup_type_add-card');
 //Form element
 const formElement = page.querySelector(
   '.popup__form_type_edit-profile'
@@ -64,7 +40,6 @@ function createCard(card) {
   ).style.backgroundImage = `URL(${card.link})`;
   cardElement.querySelector('.element__image').alt = card.name;
   cardElement.querySelector('.element__text').textContent = card.name;
-  console.dir(cardElement.querySelector('.element__image'));
   return cardElement;
 }
 // Render card
@@ -77,13 +52,9 @@ initialCards.forEach((image) =>
   renderCard(createCard(image), galleryContainer)
 );
 
-//Open popup
-const openPopup = function (popup) {
-  popup.classList.add('popup_opened');
-};
-//Close popup
-const closePopup = function (popup) {
-  popup.classList.remove('popup_opened');
+// Open/Close popup
+const togglePopup = function (popup) {
+  popup.classList.toggle('popup_opened');
 };
 
 //Update name job
@@ -97,10 +68,17 @@ function formSubmitHandler(e) {
 }
 //Evt listeners
 editBtn.addEventListener('click', function () {
-  openPopup(editPopup);
+  togglePopup(editPopup);
 });
 editCloseBtn.addEventListener('click', function () {
-  closePopup(editPopup);
+  togglePopup(editPopup);
+});
+
+addBtn.addEventListener('click', function () {
+  togglePopup(addPopup);
+});
+addCloseBtn.addEventListener('click', function () {
+  togglePopup(addPopup);
 });
 
 formElement.addEventListener('submit', formSubmitHandler);
