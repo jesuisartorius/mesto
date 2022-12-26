@@ -45,6 +45,9 @@ function createCard(card) {
   ).style.backgroundImage = `URL(${card.link})`;
   cardElement.querySelector('.element__image').alt = card.name;
   cardElement.querySelector('.element__text').textContent = card.name;
+  cardElement
+    .querySelector('.element__like-btn')
+    .addEventListener('click', handleLikeClick);
 
   return cardElement;
 }
@@ -53,10 +56,16 @@ function renderCard(card, container) {
   container.prepend(card);
 }
 
-// Reder cards on the page
+// Render cards on the page
 initialCards.forEach((image) =>
   renderCard(createCard(image), galleryContainer)
 );
+
+// Toggle like button
+
+function handleLikeClick(e) {
+  e.target.classList.toggle('element__like-btn_active');
+}
 
 // Open/Close popup
 const togglePopup = function (popup) {
