@@ -14,12 +14,17 @@ const addCloseBtn = page.querySelector('.popup__close-btn_add-card');
 const editPopup = page.querySelector('.popup_type_edit-profile');
 const addPopup = page.querySelector('.popup_type_add-card');
 //Form element
-const formElement = page.querySelector(
+const formEditProfile = page.querySelector(
   '.popup__form_type_edit-profile'
 );
-// Name Job input values
+const formAddCard = page.querySelector('.popup__form_type_add-card');
+// Name Job input
 const nameInput = page.querySelector('.popup__input_type_name');
 const jobInput = page.querySelector('.popup__input_type_job');
+// Name Link input
+const titleInput = page.querySelector('.popup__input_type_title');
+const linkInput = page.querySelector('.popup__input_type_image-link');
+
 // Name Job current values
 const nameCurrent = page.querySelector('.profile__name');
 const jobCurrent = page.querySelector('.profile__job');
@@ -40,11 +45,12 @@ function createCard(card) {
   ).style.backgroundImage = `URL(${card.link})`;
   cardElement.querySelector('.element__image').alt = card.name;
   cardElement.querySelector('.element__text').textContent = card.name;
+
   return cardElement;
 }
 // Render card
 function renderCard(card, container) {
-  container.append(card);
+  container.prepend(card);
 }
 
 // Reder cards on the page
@@ -66,6 +72,21 @@ function formSubmitHandler(e) {
 
   closePopup(editPopup);
 }
+
+// Add new card
+function formAddCardHandler(e) {
+  e.preventDefault();
+
+  const cardInfo = {
+    name: titleInput.value,
+    link: linkInput.value,
+  };
+  console.log(cardInfo);
+  renderCard(createCard(cardInfo), galleryContainer);
+  formAddCard.reset();
+  togglePopup(addPopup);
+}
+
 //Evt listeners
 editBtn.addEventListener('click', function () {
   togglePopup(editPopup);
@@ -81,4 +102,5 @@ addCloseBtn.addEventListener('click', function () {
   togglePopup(addPopup);
 });
 
-formElement.addEventListener('submit', formSubmitHandler);
+formEditProfile.addEventListener('submit', formSubmitHandler);
+formAddCard.addEventListener('submit', formAddCardHandler);
