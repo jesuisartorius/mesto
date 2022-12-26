@@ -1,8 +1,17 @@
 .element {
+  position: relative;
+
   &__delete-btn {
+    background-image: url(./../images/gallery/delete-btn.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 1.8rem;
+    height: 1.9rem;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
   }
   &__image {
-    background-image: url(./../images/gallery/Montreal.jpg);
     height: 28.2rem;
     max-width: 100%;
     border-radius: 1rem 1rem 0 0;
