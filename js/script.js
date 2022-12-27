@@ -9,10 +9,14 @@ const addBtn = page.querySelector('.profile__add-btn');
 // Close buttons
 const editCloseBtn = page.querySelector('.popup__close-btn_profile');
 const addCloseBtn = page.querySelector('.popup__close-btn_add-card');
+const previewCloseBtn = page.querySelector(
+  '.popup__close-btn_preview'
+);
 
 //Popups
 const editPopup = page.querySelector('.popup_type_edit-profile');
 const addPopup = page.querySelector('.popup_type_add-card');
+const previewPopup = page.querySelector('.popup_type_preview');
 //Form element
 const formEditProfile = page.querySelector(
   '.popup__form_type_edit-profile'
@@ -40,15 +44,20 @@ function createCard(card) {
   const cardElement = cardTemplate
     .querySelector('.element')
     .cloneNode(true);
-  cardElement.querySelector(
-    '.element__image'
-  ).style.backgroundImage = `URL(${card.link})`;
-  cardElement.querySelector('.element__image').alt = card.name;
+  const cardImage = cardElement.querySelector('.element__image');
+  cardImage.style.backgroundImage = `URL(${card.link})`;
+  // cardImage.alt = card.name;
   cardElement.querySelector('.element__text').textContent = card.name;
+
+  cardImage.addEventListener('click', () =>
+    togglePopup(previewPopup)
+  );
   cardElement
     .querySelector('.element__like-btn')
     .addEventListener('click', handleLikeClick);
-
+  cardElement
+    .querySelector('.element__delete-btn')
+    .addEventListener('click', () => cardElement.remove());
   return cardElement;
 }
 // Render card
@@ -62,15 +71,20 @@ initialCards.forEach((image) =>
 );
 
 // Toggle like button
-
 function handleLikeClick(e) {
+  console.log('lcl');
   e.target.classList.toggle('element__like-btn_active');
 }
 
+// Handle delete button click
+function handleDeleteClick(e) {
+  e.target.closest('.element').remove();
+}
+
 // Open/Close popup
-const togglePopup = function (popup) {
+function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
-};
+}
 
 //Update name job
 function formSubmitHandler(e) {
