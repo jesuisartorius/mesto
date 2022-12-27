@@ -45,21 +45,31 @@ function createCard(card) {
     .querySelector('.element')
     .cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
-  cardImage.style.backgroundImage = `URL(${card.link})`;
-  // cardImage.alt = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
   cardElement.querySelector('.element__text').textContent = card.name;
 
-  cardImage.addEventListener('click', () =>
-    togglePopup(previewPopup)
-  );
-  cardElement
-    .querySelector('.element__like-btn')
-    .addEventListener('click', handleLikeClick);
-  cardElement
-    .querySelector('.element__delete-btn')
-    .addEventListener('click', () => cardElement.remove());
+  setEventListeners(cardElement);
+
   return cardElement;
 }
+//Add eventlisteners
+function setEventListeners(element) {
+  // Delete card
+  element
+    .querySelector('.element__delete-btn')
+    .addEventListener('click', handleDeleteClick);
+
+  // Like card
+  element
+    .querySelector('.element__like-btn')
+    .addEventListener('click', handleLikeClick);
+
+  element
+    .querySelector('.element__image')
+    .addEventListener('click', openPreviewPopup);
+}
+
 // Render card
 function renderCard(card, container) {
   container.prepend(card);
@@ -72,7 +82,6 @@ initialCards.forEach((image) =>
 
 // Toggle like button
 function handleLikeClick(e) {
-  console.log('lcl');
   e.target.classList.toggle('element__like-btn_active');
 }
 
@@ -84,6 +93,16 @@ function handleDeleteClick(e) {
 // Open/Close popup
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
+}
+
+// Open preview popup
+function openPreviewPopup(e) {
+  const previewImage = page.querySelector('.popup__image');
+  const previewTitle = page.querySelector('.popup__preview-title');
+  console.log(e.target);
+  previewImage.src = e.target.src;
+  previewTitle.textContent = e.target.alt;
+  togglePopup(previewPopup);
 }
 
 //Update name job
@@ -123,6 +142,10 @@ addBtn.addEventListener('click', function () {
 });
 addCloseBtn.addEventListener('click', function () {
   togglePopup(addPopup);
+});
+
+previewCloseBtn.addEventListener('click', function () {
+  togglePopup(previewPopup);
 });
 
 formEditProfile.addEventListener('submit', formSubmitHandler);
