@@ -32,6 +32,12 @@
     align-items: center;
     width: 100%;
     max-width: 430px;
+    &_preview {
+      padding: 0;
+      background: transparent;
+      max-width: 75vw;
+      width: auto;
+    }
   }
   &__title {
     font-size: 2.4rem;
@@ -93,7 +99,7 @@
     font-size: 1.2rem;
     line-height: 1.5rem;
     color: #fff;
-    margin-top: 10px;
+    margin-top: 1rem;
   }
 }
 

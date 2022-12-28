@@ -44,17 +44,18 @@ function createCard(card) {
   const cardElement = cardTemplate
     .querySelector('.element')
     .cloneNode(true);
+
   const cardImage = cardElement.querySelector('.element__image');
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
+  cardImage.style.backgroundImage = `URL(${card.link})`;
   cardElement.querySelector('.element__text').textContent = card.name;
 
-  setEventListeners(cardElement);
+  // Adding event listeners
+  setEventListeners(cardElement, card);
 
   return cardElement;
 }
 //Add eventlisteners
-function setEventListeners(element) {
+function setEventListeners(element, card) {
   // Delete card
   element
     .querySelector('.element__delete-btn')
@@ -65,9 +66,10 @@ function setEventListeners(element) {
     .querySelector('.element__like-btn')
     .addEventListener('click', handleLikeClick);
 
+  // Open preview
   element
     .querySelector('.element__image')
-    .addEventListener('click', openPreviewPopup);
+    .addEventListener('click', () => openPreviewPopup(card));
 }
 
 // Render card
@@ -96,12 +98,12 @@ function togglePopup(popup) {
 }
 
 // Open preview popup
-function openPreviewPopup(e) {
+function openPreviewPopup(card) {
   const previewImage = page.querySelector('.popup__image');
   const previewTitle = page.querySelector('.popup__preview-title');
-  console.log(e.target);
-  previewImage.src = e.target.src;
-  previewTitle.textContent = e.target.alt;
+
+  previewImage.src = card.link;
+  previewTitle.textContent = card.name;
   togglePopup(previewPopup);
 }
 

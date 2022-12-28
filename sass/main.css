@@ -478,8 +478,6 @@ button:hover {
   height: 28.2rem;
   max-width: 100%;
   border-radius: 1rem 1rem 0 0;
-  -o-object-fit: cover;
-     object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -570,6 +568,12 @@ button:hover {
   width: 100%;
   max-width: 430px;
 }
+.popup__container_preview {
+  padding: 0;
+  background: transparent;
+  max-width: 75vw;
+  width: auto;
+}
 .popup__title {
   font-size: 2.4rem;
   font-weight: 900;
@@ -628,7 +632,7 @@ button:hover {
   font-size: 1.2rem;
   line-height: 1.5rem;
   color: #fff;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 @media only screen and (max-width: 500px) {
