@@ -95,7 +95,35 @@ function handleDeleteClick(e) {
 // Open/Close popup
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
-  formAddCard.reset();
+  // add event handlers when popup opens and remove it when popup closes
+  if (popup.classList.contains('popup_opened')) {
+    document.addEventListener('keydown', handleEscKey);
+    popup.addEventListener('click', () =>
+      closePopupByClickOnOverlay(popup)
+    );
+  } else {
+    document.removeEventListener('keydown', handleEscKey);
+    popup.removeEventListener('click', () =>
+      handleOutsideClick(popup)
+    );
+  }
+}
+
+function closePopupByClickOnOverlay(popup) {
+  popup.addEventListener('click', (evt) => {
+    if (!evt.target.classList.contains('popup_opened')) {
+      return;
+    } else {
+      togglePopup(evt.target);
+    }
+  });
+}
+
+function handleEscKey(evt) {
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    togglePopup(popup);
+  }
 }
 
 // Open preview popup
