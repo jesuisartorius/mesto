@@ -95,6 +95,7 @@ function handleDeleteClick(e) {
 // Open/Close popup
 function togglePopup(popup) {
   popup.classList.toggle('popup_opened');
+  formAddCard.reset();
 }
 
 // Open preview popup
@@ -114,7 +115,7 @@ function formSubmitHandler(e) {
   nameCurrent.textContent = nameInput.value;
   jobCurrent.textContent = jobInput.value;
 
-  closePopup(editPopup);
+  togglePopup(editPopup);
 }
 
 // Add new card
@@ -125,7 +126,6 @@ function formAddCardHandler(e) {
     name: titleInput.value,
     link: linkInput.value,
   };
-  console.log(cardInfo);
   renderCard(createCard(cardInfo), galleryContainer);
   formAddCard.reset();
   togglePopup(addPopup);
